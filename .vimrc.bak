@@ -1,0 +1,95 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+Plugin 'user/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+syntax on
+execute pathogen#infect()
+
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+set laststatus=2
+
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+"
+
+set number
+set mouse=a
+set hlsearch
+set incsearch
+set ignorecase
+
+nnoremap <c-d> dd
+nnoremap <c-x> bved
+nnoremap <c-i><c-l> o<esc>
+nnoremap <c-i><c-j> i<space><esc>
+nnoremap <c-i><c-k> i<tab><esc>
+nnoremap > v>
+nnoremap < v<
+nnoremap <c-f> zf%
+nnoremap <c-o> zo
+vnoremap qq <Esc>`>a'<Esc>`<i'<Esc>
+vnoremap QQ <Esc>`>a"<Esc>`<i"<Esc>
+inoremap { {}<left>
+inoremap [ []<left>
+inoremap < <><left>
+inoremap ( ()<left>
+inoremap ' ''<left>
+inoremap " ""<left>
+inoremap /* /**/<left><left>
+
+
+augroup pythongroup
+    autocmd!
+    autocmd filetype python nnoremap <c-c> I#<esc>
+    autocmd filetype python :iabbrev funn def :<left>
+    autocmd FileType python :iabbrev iff if:<left>
+    autocmd FileType python :iabbrev class class:<left>
+    autocmd filetype python inoremap ,b (){<CR><CR>}<up>
+    autocmd filetype python inoremap ,c {<CR><CR>}<up>
+augroup END
+
+augroup Cppgroup
+    autocmd filetype c,cpp,verilog nnoremap <c-c> I//<esc>
+    autocmd filetype c,cpp,verilog vnoremap <c-b> <Esc>`>a*/<Esc>`<i/*<Esc>
+    autocmd filetype c,cpp,verilog inoremap ,b (){<CR><CR>}<up>
+    autocmd filetype c,cpp,verilog inoremap ,c {<CR><CR>}<up>
+    autocmd FileType c,cpp :iabbrev eliff else if<left>
+    autocmd FileType c,cpp :iabbrev forr for(;; <left><left><left>
+    autocmd FileType c,cpp :iabbrev clss class <CR>{<CR>public:<CR>private:<CR><up><up><up><up><right><right><right><right><right>
+augroup END
