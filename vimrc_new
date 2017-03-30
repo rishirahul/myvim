@@ -1,0 +1,125 @@
+set nocompatible               " be iMproved, required
+filetype off                  " required
+
+set number
+set mouse=a
+set hlsearch
+set incsearch
+set ignorecase
+let mapleader = ";"
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+nnoremap <c-d> dd
+nnoremap <c-x> bved
+nnoremap > v>
+nnoremap < v<
+vnoremap qq <Esc>`>a'<Esc>`<i'<Esc>
+vnoremap QQ <Esc>`>a"<Esc>`<i"<Esc>
+
+filetype plugin indent on    " required
+syntax on
+
+" Show whitespace
+" MUST be inserted BEFORE the colorscheme command
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+au InsertLeave * match ExtraWhitespace /\s\+$/
+
+" Enable syntax highlighting
+" You need to reload this file for the change to apply
+filetype off
+filetype plugin indent on
+filetype plugin on
+syntax on
+
+
+" Useful settings
+set history=700
+set undolevels=700
+
+
+" Make search case insensitive
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set relativenumber 
+
+
+" Setup Pathogen to manage your plugins
+" mkdir -p ~/.vim/autoload ~/.vim/bundle
+" curl -so ~/.vim/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+" Now you can install any plugin into a .vim/bundle/plugin-name/ folder
+execute pathogen#infect()
+
+set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
+set laststatus=2
+
+" Zoom / Restore window.
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <silent> <C-a><C-a> :ZoomToggle<CR>
+nnoremap <silent> <C-a><C-s> :Ack
+nnoremap <silent> <C-a><C-d> :MRU<cr>
+nnoremap <silent> <C-a><C-f> :FZF<cr>
+
+" Color scheme
+" mkdir -p ~/.vim/colors && cd ~/.vim/colors
+" wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
+set t_Co=256
+"color wombat256mod
+syntax enable
+set background=dark
+let g:solarized_termcolors=16 "this is what fixed it for me
+let g:solarized_termcolors = &t_Co
+let g:solarized_termtrans = 1
+colorscheme solarized
+set term=xterm-256color
+
+" If installed using git
+set rtp+=~/.fzf
+let g:fzf_launcher='gnome-terminal --disable-factory -x bash -ic %s'
+
+
+"Important vim plugins to install
+"   surround -- https://github.com/tpope/vim-surround
+"   snipmate -- https://github.com/garbas/vim-snipmate
+"   tcomment -- https://github.com/tomtom/tcomment_vim
+"   MRU      -- https://github.com/tomtom/tcomment_vim -- most recently used
+"   fuzzyfinder -- https://github.com/junegunn/fzf
+"   NERDtree
+"   Matchit  -- http://www.vim.org/scripts/script.php?script_id=39
+"   ack      -- https://github.com/mileszs/ack.vim 
