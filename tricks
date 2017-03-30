@@ -1,0 +1,61 @@
+surround
+
+    "html"   csW"
+    'html'   cs"'
+
+    <html>     select area S<html>
+        surround with html
+    </html>
+
+    <html>delete html</html>  convert to " then ds"
+
+    <div>html to div</div>    cst<div>
+
+
+snipmate
+	just press tab -- see doc for more help
+
+Tcomment
+	gc
+	gcc
+
+MRU
+	Invoked using :MRU -- map to <c-]>
+
+fuzzyfinder
+	:FZF command
+
+Matchit
+	% for matching like normal matching
+
+ack
+
+gUU
+	converts whole line to capital
+
+gU3w
+	converts next 3 words to upper  case
+
+gU3U
+	converts next 3 lines to upper case
+
+Insert mode  (ctrl h)
+	delete
+
+Insert mode  (ctrl w)
+	delete back
+
+Insert mode  (ctrl u)
+	delete till beginning of line
+
+Insert mode  (ctrl k)
+	delete till end of line
+
+:%s/pattern//gn
+	count matches
+
+vim filename +line_number
+	directly open vim in specified line number
+
+grep -in pattern filename 
+	displays all lines from filename where pattern occurs, with the line number at the beginning of each output line.  
